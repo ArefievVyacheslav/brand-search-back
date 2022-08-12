@@ -1,0 +1,12 @@
+{
+  "name": "brand-search-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon ./api/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongodb": "^4.4.1",
+    "nodemon": "^2.0.19"
+  }
+}
