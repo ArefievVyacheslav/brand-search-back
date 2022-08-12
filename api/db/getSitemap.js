@@ -81,7 +81,7 @@ module.exports = async function getSitemap(id) {
 
     let result = []
 
-    for (let s = 0, e = 45000; s < sitemapArr.length; s += 45000, e += 45000)
+    for (let s = 0, e = 5000; s < sitemapArr.length; s += 45000, e += 45000)
       result.push(sitemapArr.slice(s, +e))
 
     fs.writeFileSync('../brand-search/sitemapLength.txt', `${result.length}`)
