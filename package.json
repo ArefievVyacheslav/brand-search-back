@@ -5,6 +5,7 @@
     "start": "nodemon ./api/index.js"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "express": "^4.17.3",
     "mongodb": "^4.4.1",
     "nodemon": "^2.0.19"
