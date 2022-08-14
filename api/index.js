@@ -1,4 +1,6 @@
 const cors = require('cors')
+const path = require('path')
+
 const getProduct = require('./db/getProduct')
 const getProducts = require('./db/getProducts')
 const getSelects = require('./db/getSelects')
@@ -9,6 +11,7 @@ const app = express();
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('images'))
 
 // Получение нужного товара
 app.get('/api/product/:id', async (req, res) => {
