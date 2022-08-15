@@ -21,7 +21,7 @@ module.exports = async function getSelects() {
     const sizes = []
     results.forEach(item => {
       const exceptions = [ '.', 'A', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ]
-      if (Array.isArray(item.params.size)) {
+      if (item && item.params && Array.isArray(item.params.size)) {
         item.params.size.forEach(size => {
           if (!sizes.includes(size)
             && !exceptions.includes(size)

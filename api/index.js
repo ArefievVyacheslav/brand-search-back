@@ -1,5 +1,4 @@
 const cors = require('cors')
-const path = require('path')
 
 const getProduct = require('./db/getProduct')
 const getProducts = require('./db/getProducts')
