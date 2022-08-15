@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json())
 app.use(cors())
-app.use(express.static('images'))
+app.use(express.static('prepareImages'))
 
 // Получение нужного товара
 app.get('/api/product/:id', async (req, res) => {
