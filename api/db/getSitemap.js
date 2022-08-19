@@ -85,7 +85,7 @@ module.exports = async function getSitemap(id) {
       result.push(sitemapArr.slice(s, +e))
 
     // fs.writeFileSync('../../brand-search/sitemapLength.txt', `${result.length}`)
-    fs.writeFileSync('../../../frontend/brand-search/sitemapLength.txt', `${result.length}`)
+    fs.writeFileSync('../../frontend/brand-search/sitemapLength.txt', `${result.length}`)
 
     return result[id]
 
