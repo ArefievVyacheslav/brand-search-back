@@ -10,7 +10,9 @@ module.exports = async function getSitemap(id) {
     const db = await client.db('ss')
     const collection = await db.collection('all')
     const allP = await collection.find({}).toArray()
-    const allProductsNamesIdsArr = allP.map(product => [ `product/${product.name.toLowerCase().replaceAll(' ', '-')}-${product.id}` ])
+    const allProductsNamesIdsArr = allP.map(product => {
+      if (product && product.name) return [`product/${product.name.toLowerCase().replaceAll(' ', '-')}-${product.id}`]
+    })
     // const allAuxiliaryLinks = [ '/news', '/delivery', '/payment', '/warranty', '/reviews', '/about', '/jobs', '/contacts' ]
 
     // СЛОВАРЬ КАТЕГОРИЙ
@@ -34,7 +36,9 @@ module.exports = async function getSitemap(id) {
     const sexArr = [ '1-men', '1-women', '1-unisex', '1-child' ]
     const catArr = [ '2-clothes', '2-shoes', '2-accessories' ]
     const priceArr = [ '4-price-0-3000', '4-price-3000-5000', '4-price-5000-7000', '4-price-7000-10000', '4-price-10000-9999999' ]
-    const brandsArr = selects.brands.map(brand => `6-brand-${brand.replaceAll(' ', '-').toLowerCase()}`)
+    const brandsArr = selects.brands.map(brand => {
+      if (brand) return `6-brand-${brand.replaceAll(' ', '-').toLowerCase()}`
+    })
     const sizesArr = selects.sizes.map(size => `7-sizes-${size}`)
     const colorArr = [ '91-color-black', '91-color-white', '91-color-red', '91-color-orange', '91-color-yellow', '91-color-pink',
       '91-color-purple', '91-color-blue', '91-color-green', '91-color-brown' ]
@@ -81,7 +85,7 @@ module.exports = async function getSitemap(id) {
 
     let result = []
 
-    for (let s = 0, e = 5000; s < sitemapArr.length; s += 5000, e += 5000)
+    for (let s = 0, e = 45000; s < sitemapArr.length; s += 45000, e += 45000)
       result.push(sitemapArr.slice(s, +e))
 
     // fs.writeFileSync('../../brand-search/sitemapLength.txt', `${result.length}`)
