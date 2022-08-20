@@ -22,7 +22,7 @@ module.exports = async function getSitemap(id) {
       belts: 'Ремни', perfumery: 'Парфюмерия', caps: 'Кепки'
     }
     // ПОЛУЧАЮ СЕЛЕКТЫ ТЕКУЩИЕ
-    const { data } = await axios.get('http://localhost:3001/api/selects')
+    const { data } = await axios.get('https://api.sales-search.ru/api/selects')
     const selects = data
 
     // ПРИВОЖУ ЗНАЧЕНИЯ В СЛОВАРЕ И ЗНАЧЕНИЯ СЕЛЕКТОВ К НИЖНЕМУ РЕГИСТРУ

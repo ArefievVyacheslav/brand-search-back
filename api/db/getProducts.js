@@ -9,7 +9,7 @@ module.exports = async function getProducts(paramsObj) {
     let products = null
     const paramsArrKeys = Object.keys(paramsObj)
 
-    const { data } = await axios.get('http://localhost:3001/api/selects')
+    const { data } = await axios.get('https://api.sales-search.ru/api/selects')
     if (data.brands.includes('Все')) data.brands.splice(data.brands.indexOf('Все'), 1)
     if (data.sizes.includes('Все')) data.sizes.splice(data.sizes.indexOf('Все'), 1)
 
