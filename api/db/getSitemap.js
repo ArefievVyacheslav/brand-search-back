@@ -55,11 +55,11 @@ module.exports = async function getSitemap(id) {
     // дополняю массив карты сайта ссылками на категории
     catArr.forEach(cat => sexArr.forEach(sex => catArr.push(`${sex}/${cat}`)))
     catArr.forEach(cat => sitemapArr.push(`category/${cat}`))
-    // дополняю массив карты сайта ссылками на ценовой диапазон
-    priceArr.forEach(price => sitemapArr.forEach(link => {
-      if (!link.includes('/4-')) sitemapArr.push(`${link}/${price}`)
-    }))
-    priceArr.forEach(price => sitemapArr.push(`category/${price}`))
+    // // дополняю массив карты сайта ссылками на ценовой диапазон
+    // priceArr.forEach(price => sitemapArr.forEach(link => {
+    //   if (!link.includes('/4-')) sitemapArr.push(`${link}/${price}`)
+    // }))
+    // priceArr.forEach(price => sitemapArr.push(`category/${price}`))
     // дополняю массив карты сайта ссылками с рассрочкой
     sitemapArr.forEach(link => {
       if (!link.includes('/5-')) sitemapArr.push(`${link}/5-instalments-yes`)
@@ -75,11 +75,11 @@ module.exports = async function getSitemap(id) {
       if (!link.includes('/7-sizes-')) sitemapArr.push(`${link}/${size}-`)
     }))
     sizesArr.forEach(size => sitemapArr.push(`category/${size}-`))
-    // дополняю массив карты сайта ссылками на цвета
-    colorArr.forEach(color => sitemapArr.forEach(link => {
-      if (!link.includes('/91-')) sitemapArr.push(`${link}/${color}`)
-    }))
-    colorArr.forEach(color => sitemapArr.push(`category/${color}`))
+    // // дополняю массив карты сайта ссылками на цвета
+    // colorArr.forEach(color => sitemapArr.forEach(link => {
+    //   if (!link.includes('/91-')) sitemapArr.push(`${link}/${color}`)
+    // }))
+    // colorArr.forEach(color => sitemapArr.push(`category/${color}`))
     sitemapArr.push(...allProductsNamesIdsArr)
     // sitemapArr.push(...allAuxiliaryLinks)
 
