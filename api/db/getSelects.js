@@ -29,7 +29,13 @@ module.exports = async function getSelects() {
             && !size.includes('-')
             && !(size === 'X')
             && !(size === 'U')
-            && size.length < 5) sizes.push(size)
+            && size.length < 5) {
+            if (size === '2XS') sizes.push('XXS')
+            if (size === '2XL') sizes.push('XXL')
+            if (size === '3XL') sizes.push('XXXL')
+            if (size === '4XL') sizes.push('XXXXL')
+            else if (size !== '00') sizes.push(size)
+          }
         })
       }
     })
