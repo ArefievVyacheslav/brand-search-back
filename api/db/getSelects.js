@@ -30,11 +30,17 @@ module.exports = async function getSelects() {
             && !(size === 'X')
             && !(size === 'U')
             && size.length < 5) {
-            if (size === '2XS') sizes.push('XXS')
-            if (size === '2XL') sizes.push('XXL')
-            if (size === '3XL') sizes.push('XXXL')
-            if (size === '4XL') sizes.push('XXXXL')
-            else if (size !== '00') sizes.push(size)
+            if (size === '2XS' && !sizes.includes('XXS')) sizes.push('XXS')
+            if (size === '2XL' && !sizes.includes('XXL')) sizes.push('XXL')
+            if (size === '3XL' && !sizes.includes('XXXL')) sizes.push('XXXL')
+            if (size === '4XL' && !sizes.includes('XXXXL')) sizes.push('XXXXL')
+            if (size !== '00'
+                && size !== '2XS'
+                && size !== '2XL'
+                && size !== '3XL'
+                && size !== '4XL') {
+              sizes.push(size)
+            }
           }
         })
       }
@@ -56,7 +62,7 @@ module.exports = async function getSelects() {
     total.sizes = sizes.sort((a, b) => {
       if (isNaN(a) && isNaN(b)) return weights[a] - weights[b]
     })
-    total.sizes = [ ...total.sizes.filter(el => isNaN(el)), ...total.sizes.filter(el => !isNaN(el)) ]
+    total.sizes = [ ...total.sizes.filter(el => isNaN(el)), ...total.sizes.filter(el => !isNaN(el)).sort( (a, b) => a.localeCompare(b, undefined, { numeric:true }) ) ]
 
     const _type = { clothes: [], shoes: [], accessories: [] }
     results.forEach(item => {
@@ -68,7 +74,7 @@ module.exports = async function getSelects() {
           && item.categoryId !== undefined) _type[key].push(item.categoryId)
       })
     })
-    total._type = _type
+    total._type = { clothes: _type.clothes.sort(), shoes: _type.shoes.sort(), accessories: _type.accessories.sort() }
 
 
 
