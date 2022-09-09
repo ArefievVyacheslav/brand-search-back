@@ -12,6 +12,8 @@ app.use(express.json())
 app.use(cors())
 app.use(express.static('prepareImages'))
 
+let selects;
+
 // Получение нужного товара
 app.get('/api/product/:id', async (req, res) => {
   const id = req.params.id
@@ -28,8 +30,14 @@ app.get('/api/products', async (req, res) => {
 
 
 // Получение селектов для каталога
+app.get('/api/get-selects', async (req, res) => {
+  selects = await getSelects()
+  res.send(selects)
+})
+
+
+// Получение селектов для каталога
 app.get('/api/selects', async (req, res) => {
-  const selects = await getSelects()
   res.send(selects)
 })
 
