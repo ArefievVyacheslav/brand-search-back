@@ -43,6 +43,7 @@ app.get('/api/products', async (req, res) => {
 app.get('/api/get-started', async (req, res) => {
   selects = await getSelects()
   await axios.get('https://api.sales-search.ru/api/main')
+  await axios.get('https://api.sales-search.ru/api/sitemap/123456789')
   const { data } = await axios.get('https://api.sales-search.ru/api/products')
   products = data
   res.send('OK!!!')
