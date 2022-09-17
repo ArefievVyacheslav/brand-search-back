@@ -60,11 +60,11 @@ module.exports = async function getSitemap(id) {
     //   if (!link.includes('/4-')) sitemapArr.push(`${link}/${price}`)
     // }))
     // priceArr.forEach(price => sitemapArr.push(`category/${price}`))
-    // дополняю массив карты сайта ссылками с рассрочкой
-    sitemapArr.forEach(link => {
-      if (!link.includes('/5-')) sitemapArr.push(`${link}/5-instalments-yes`)
-    })
-    sitemapArr.push(`category/5-instalments-yes`)
+    // // дополняю массив карты сайта ссылками с рассрочкой
+    // sitemapArr.forEach(link => {
+    //   if (!link.includes('/5-')) sitemapArr.push(`${link}/5-instalments-yes`)
+    // })
+    // sitemapArr.push(`category/5-instalments-yes`)
     // дополняю массив карты сайта ссылками на brands
     brandsArr.forEach(brand => sitemapArr.forEach(link => {
       if (!link.includes('/6-brand-')) sitemapArr.push(`${link}/${brand}`)
