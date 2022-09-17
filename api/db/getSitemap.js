@@ -95,7 +95,7 @@ module.exports = async function getSitemap(id) {
       const sitemapUrlArr = [ ...fs.readFileSync('./sitemapUrlArr.txt')]
       const result = []
 
-      for (let s = 0, e = 45000; s < sitemapArr.length; s += 45000, e += 45000)
+      for (let s = 0, e = 45000; s < sitemapUrlArr.length; s += 45000, e += 45000)
         result.push(sitemapUrlArr.slice(s, +e))
 
       return result[id]
