@@ -38,7 +38,9 @@ module.exports = async function getSelects() {
                 && size !== '2XS'
                 && size !== '2XL'
                 && size !== '3XL'
-                && size !== '4XL') {
+                && size !== '4XL'
+                && size !== '30R'
+                && size !== '34A') {
               sizes.push(size)
             }
           }
