@@ -52,10 +52,10 @@ app.get('/api/get-started', async (req, res) => {
   // const { data } = await axios.get('http://localhost:3001/api/products') // перед пушем комменчу
   try {
     const { data } = await axios.get('https://api.sales-search.ru/api/products')                   // локально комменчу
+    products = data
   } catch (e) {
     console.log('products request', e);
   }
-  products = data
   res.send('OK!!!')
 })
 
