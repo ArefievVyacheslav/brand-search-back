@@ -43,11 +43,9 @@ app.get('/api/products', async (req, res) => {
 app.get('/api/get-started', async (req, res) => {
   selects = await getSelects()
   await axios.get('https://api.sales-search.ru/api/main')
-  // await axios.get('http://localhost:3001/api/sitemap/123456789')
-  const { data } = await axios.get('https://api.sales-search.ru/api/products')
-  // const { data } = await axios.get('http://localhost:3001/api/products')
-  const sitemapLength = fs.readFileSync('./sitemaps/sitemapLength.txt', 'utf-8')
-  fs.writeFileSync('../../frontend/brand-search/sitemapLength.txt', sitemapLength)
+  // await axios.get('http://localhost:3001/api/sitemap/123456789')         // перед пушем комменчу
+  const { data } = await axios.get('https://api.sales-search.ru/api/products')                   // локально комменчу
+  // const { data } = await axios.get('http://localhost:3001/api/products') // перед пушем комменчу
   products = data
   res.send('OK!!!')
 })
