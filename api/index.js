@@ -8,6 +8,7 @@ const getMainData = require('./db/getMainData')
 
 const express = require('express')
 const axios = require("axios");
+const fs = require("fs");
 const app = express();
 
 app.use(express.json())
@@ -45,6 +46,8 @@ app.get('/api/get-started', async (req, res) => {
   // await axios.get('http://localhost:3001/api/sitemap/123456789')
   const { data } = await axios.get('https://api.sales-search.ru/api/products')
   // const { data } = await axios.get('http://localhost:3001/api/products')
+  const sitemapLength = fs.readFileSync('./sitemaps/sitemapLength.txt', 'utf-8')
+  fs.writeFileSync('../../frontend/brand-search/sitemapLength.txt', sitemapLength)
   products = data
   res.send('OK!!!')
 })
