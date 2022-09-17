@@ -5,7 +5,7 @@ const fs = require("fs");
 
 module.exports = async function getSitemap(id) {
   try {
-    if (id === 123456789) {
+    if (id === '123456789') {
       // CONNECT DATABASE
       await client.connect()
       const db = await client.db('ss')
@@ -84,22 +84,13 @@ module.exports = async function getSitemap(id) {
       sitemapArr.push(...allProductsNamesIdsArr)
       // sitemapArr.push(...allAuxiliaryLinks)
 
-      let result = []
-      fs.writeFileSync('./sitemapUrlArr.txt', `${result}`)
+      for (let s = 0, e = 45000; s < sitemapArr.length; s += 45000, e += 45000)
+        fs.writeFileSync(`./sitemaps/sitemapUrlArr${s / 45000}.txt`, `${sitemapArr.slice(s, +e)}`)
 
       // fs.writeFileSync('../../brand-search/sitemapLength.txt', `${result.length}`)
-      fs.writeFileSync('../../frontend/brand-search/sitemapLength.txt', `${result.length}`)
+      // fs.writeFileSync('../../frontend/brand-search/sitemapLength.txt', `${result.length}`)
 
-    } else {
-
-      const sitemapUrlArr = [ ...fs.readFileSync('./sitemapUrlArr.txt')]
-      const result = []
-
-      for (let s = 0, e = 45000; s < sitemapUrlArr.length; s += 45000, e += 45000)
-        result.push(sitemapUrlArr.slice(s, +e))
-
-      return result[id]
-    }
+    } else return JSON.stringify(fs.readFileSync(`./sitemaps/sitemapUrlArr${id}.txt`, 'utf8').split(','))
   } catch (e) {
     console.log(e);
   }
