@@ -29,7 +29,6 @@ app.get('/api/product/:id', async (req, res) => {
 // Получение нужных товаров
 app.get('/api/products', async (req, res) => {
   if (products && Object.keys(req.query).length === 0) {
-    console.log(true);
     res.send(products)
   }
   else {
@@ -42,9 +41,10 @@ app.get('/api/products', async (req, res) => {
 // Получение стартовых данных
 app.get('/api/get-started', async (req, res) => {
   selects = await getSelects()
-  await axios.get('http://localhost:3001/api/main')
-  await axios.get('http://localhost:3001/api/sitemap/123456789')
-  const { data } = await axios.get('http://localhost:3001/api/products')
+  await axios.get('https://api.sales-search.ru/api/main')
+  // await axios.get('http://localhost:3001/api/sitemap/123456789')
+  const { data } = await axios.get('https://api.sales-search.ru/api/products')
+  // const { data } = await axios.get('http://localhost:3001/api/products')
   products = data
   res.send('OK!!!')
 })

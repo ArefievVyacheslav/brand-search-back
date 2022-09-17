@@ -88,7 +88,7 @@ module.exports = async function getSitemap(id) {
         fs.writeFileSync(`./sitemaps/sitemapUrlArr${s / 45000}.txt`, `${sitemapArr.slice(s, +e)}`)
 
       // fs.writeFileSync('../../brand-search/sitemapLength.txt', `${result.length}`)
-      // fs.writeFileSync('../../frontend/brand-search/sitemapLength.txt', `${result.length}`)
+      fs.writeFileSync('./sitemaps/sitemapLength.txt', `${sitemapArr.length}`)
 
     } else return JSON.stringify(fs.readFileSync(`./sitemaps/sitemapUrlArr${id}.txt`, 'utf8').split(','))
   } catch (e) {
