@@ -1,7 +1,8 @@
 const { MongoClient } = require('mongodb')
 const client = new MongoClient('mongodb://localhost:27017')
 const axios = require('axios')
-const fs = require("fs");
+const fs = require("fs")
+const translite = require('../../helpers/translite')
 
 module.exports = async function getSitemap(id) {
   try {
@@ -12,7 +13,7 @@ module.exports = async function getSitemap(id) {
       const collection = await db.collection('all')
       const allP = await collection.find({}).toArray()
       const allProductsNamesIdsArr = allP.map(product => {
-        if (product && product.name) return [`product/${product.name.toLowerCase().replaceAll(' ', '-')}-${product.id}`]
+        if (product && product.name) return [translite(`product/${product.name.toLowerCase().replaceAll(' ', '-')}-${product.id}`)]
       })
       // const allAuxiliaryLinks = [ '/news', '/delivery', '/payment', '/warranty', '/reviews', '/about', '/jobs', '/contacts' ]
 
