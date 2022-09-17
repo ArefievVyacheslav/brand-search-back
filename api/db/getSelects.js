@@ -24,6 +24,7 @@ module.exports = async function getSelects() {
       if (item && item.params && Array.isArray(item.params.size)) {
         item.params.size.forEach(size => {
           if (!sizes.includes(size)
+            && size
             && !exceptions.includes(size)
             && !size.includes(',')
             && !size.includes('-')
