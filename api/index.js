@@ -42,11 +42,19 @@ app.get('/api/products', async (req, res) => {
 // Получение стартовых данных
 app.get('/api/get-started', async (req, res) => {
   selects = await getSelects()
-  await axios.get('https://api.sales-search.ru/api/main')
+  try {
+    await axios.get('https://api.sales-search.ru/api/main')
+  } catch (e) {
+    console.log('main request', e);
+  }
   // await axios.get('http://localhost:3001/api/main')
   // await axios.get('http://localhost:3001/api/sitemap/123456789')         // перед пушем комменчу
   // const { data } = await axios.get('http://localhost:3001/api/products') // перед пушем комменчу
-  const { data } = await axios.get('https://api.sales-search.ru/api/products')                   // локально комменчу
+  try {
+    const { data } = await axios.get('https://api.sales-search.ru/api/products')                   // локально комменчу
+  } catch (e) {
+    console.log('products request', e);
+  }
   products = data
   res.send('OK!!!')
 })
