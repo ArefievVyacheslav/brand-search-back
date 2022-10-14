@@ -31,14 +31,14 @@ module.exports = async function getProducts(paramsObj) {
         : ttlObj[`-${size}-`.toLowerCase()] = size
       return ttlObj
     }, {})
-    const color = { black: 'Чёрный', white: 'Белый', red: 'Красный', orange: 'Оранжевый', yellow: 'Желтый', pink: 'Розовый', purple: 'Фиолетовый', blue: 'Синий', green: 'Зелёный', brown: 'Коричневый' }
+    const color = { '-black': 'Чёрный', '-white': 'Белый', '-red': 'Красный', '-orange': 'Оранжевый', '-yellow': 'Желтый', '-pink': 'Розовый', '-purple': 'Фиолетовый', '-blue': 'Синий', '-green': 'Зелёный', '-brown': 'Коричневый' }
 
 
     const params = paramsArrKeys.reduce((ttlObj,keyParam) => {
 
       Object.keys(gender).forEach(keyGender => {
         if (keyParam.includes(keyGender)) keyGender === '-child'
-          ? ttlObj['params.age'] = gender[keyGender] : ttlObj['params.gender'] = gender[keyGender]
+          ? ttlObj['params.age'] = gender[keyGender] : ttlObj['params.gender'] = { $in: [gender[keyGender], 'unisex'] }
       })
 
       Object.keys(category).forEach(keyCategory => {

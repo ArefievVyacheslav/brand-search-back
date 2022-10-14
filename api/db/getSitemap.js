@@ -41,7 +41,7 @@ module.exports = async function getSitemap(id) {
       const brandsArr = selects.brands.map(brand => {
         if (brand) return `6-brand-${brand.replaceAll(' ', '-').toLowerCase()}`
       })
-      const sizesArr = selects.sizes.map(size => `7-sizes-${size}`)
+      const sizesArr = selects.sizes.map(size => `7-sizes-${size.toLowerCase()}`)
       const colorArr = [ '91-color-black', '91-color-white', '91-color-red', '91-color-orange', '91-color-yellow', '91-color-pink',
         '91-color-purple', '91-color-blue', '91-color-green', '91-color-brown' ]
 

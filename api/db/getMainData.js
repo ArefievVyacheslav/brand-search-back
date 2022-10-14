@@ -19,7 +19,7 @@ module.exports = async function getMainData() {
             }, 'https://api.sales-search.ru/api/products?')
             const { data } = await axios.get(apiUrl)
             if (type === 'sale') resultObj.bigSaleProducts = data.products.slice(0, 5)
-            if (type === 'new') resultObj.newProducts = [ data.products[0], data.products[3], data.products[6], data.products[9], data.products[12] ]
+            if (type === 'new') resultObj.newProducts = [ data.products[1], data.products[3], data.products[6], data.products[9], data.products[12] ]
             if (type === 'rating') resultObj.ratingProducts = data.products.slice(0, 5)
         }
         await getData('/category/sort-sale', 'sale')
