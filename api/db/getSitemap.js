@@ -13,7 +13,7 @@ module.exports = async function getSitemap(id) {
       const collection = await db.collection('all')
       const allP = await collection.find({}).toArray()
       const allProductsNamesIdsArr = allP.map(product => {
-        if (product && product.name) return ['product/' + translite(`${product.name.toLowerCase().replaceAll(' ', '-')}-${product.id}`)]
+        if (product && product.name) return ['product/' + translite(`${product.name.toLowerCase().replaceAll(' ', '-')}-${product.shop === 'brandshop' || product.shop === 'cdek' || product.shop === 'stockmann' ? product.idd : product.id}`)]
       })
       // const allAuxiliaryLinks = [ '/news', '/delivery', '/payment', '/warranty', '/reviews', '/about', '/jobs', '/contacts' ]
 
