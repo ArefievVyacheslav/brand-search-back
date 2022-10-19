@@ -37,8 +37,8 @@ module.exports = async function getProducts(paramsObj) {
     const params = paramsArrKeys.reduce((ttlObj,keyParam) => {
 
       Object.keys(gender).forEach(keyGender => {
-        if (keyParam.includes(keyGender)) ttlObj['params.gender'] = gender[keyGender]
         if (keyGender === '-child' && keyParam.includes(keyGender)) ttlObj['params.age'] = gender[keyGender]
+        else if (keyParam.includes(keyGender)) ttlObj['params.gender'] = gender[keyGender]
       })
 
       Object.keys(category).forEach(keyCategory => {
