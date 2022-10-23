@@ -29,9 +29,7 @@ app.get('/api/product/:id', async (req, res) => {
 
 // Получение нужных товаров
 app.get('/api/products', async (req, res) => {
-  if (products && Object.keys(req.query).length === 0) {
-    res.send(products)
-  }
+  if (products && Object.keys(req.query).length === 0) res.send(products)
   else {
     const freshProducts = await getProducts(req.query)
     res.send(freshProducts)
@@ -41,9 +39,13 @@ app.get('/api/products', async (req, res) => {
 
 // Получение стартовых данных
 app.get('/api/get-started', async (req, res) => {
+  // получаю селекты и пишу их в переменную, чтоб потом отдавать
   selects = await getSelects()
+  // запускаю заготовки
   setTimeout(async () => {
+    // получаю товары для главной
     await axios.get('https://api.sales-search.ru/api/main')
+    // записываю файлы карт сайта
     // await axios.get('http://localhost:3001/api/sitemap/123456789')         // перед пушем комменчу
     // const { data } = await axios.get('http://localhost:3001/api/products') // перед пушем комменчу
     const { data } = await axios.get('https://api.sales-search.ru/api/products')                   // локально комменчу
@@ -69,8 +71,10 @@ app.get('/api/sitemap/:id', async (req, res) => {
 // Отдача данных для главной
 app.get('/api/main', async (req, res) => {
   if (!main) {
+    // получение товаров для главной
     main = await getMainData()
     res.send(main)
+    // если уже есть - отправляю заготовленные
   } else res.send(main)
 })
 

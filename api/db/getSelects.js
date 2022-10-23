@@ -49,15 +49,29 @@ module.exports = async function getSelects() {
       }
     })
     const weights = {
+      'OS':0,
       'XXXS':1,
       'XXS':2,
       'XS':3,
       'S':4,
-      'M':5,
-      'L':6,
-      'XL':7,
-      'XXL':8,
-      'XXXL':9
+      'S/M':5,
+      'M':6,
+      'M/L':7,
+      'L':8,
+      'XL':9,
+      'XXL':10,
+      'XXXL':11,
+      'XXXXL':12,
+      '75D':13,
+      '75C':14,
+      '80C':15,
+      '80D':16,
+      '6Y':17,
+      '8Y':18,
+      '10Y':19,
+      '12Y':20,
+      '34R':21,
+      '38R':22
     }
     total.sizes = sizes.sort((a, b) => {
       if (!isNaN(a) && !isNaN(b)) return a - b
