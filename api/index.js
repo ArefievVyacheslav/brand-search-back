@@ -9,6 +9,7 @@ const getMainData = require('./db/getMainData')
 const express = require('express')
 const axios = require("axios");
 const fs = require("fs");
+const translite = require("../helpers/translite");
 const app = express();
 
 app.use(express.json())
@@ -31,7 +32,7 @@ app.get('/api/product/:id', async (req, res) => {
 app.get('/api/products', async (req, res) => {
   if (products && Object.keys(req.query).length === 0) res.send(products)
   else {
-    const freshProducts = await getProducts(req.query)
+    const freshProducts = await getProducts(req.query, req)
     res.send(freshProducts)
   }
 })
@@ -76,6 +77,24 @@ app.get('/api/main', async (req, res) => {
     res.send(main)
     // если уже есть - отправляю заготовленные
   } else res.send(main)
+})
+
+// Получение нужного товара ДЛЯ ВК
+app.get('/api/vk-product/:id', async (req, res) => {
+  const id = req.params.id
+  let product = await getProduct(id)
+  product = `
+${product.pictureServer ? product.pictureServer : product.picture}
+${product.name}
+SALE ${product.sale}%
+SIZE ${product.params.size.reduce((acc, size, idx) => acc += product.params.size.length === 1
+      ? `${size}` : `${product.params.size.length - 1 !== idx
+          ? `${size}, ` : `${size}`}`, '')}
+old price ${product.oldprice} rub.
+NEW PRICE ${product.price} rub.
+link https://sales-search.ru/product/${translite((product.name))}-${product.shop === 'brandshop' || product.shop === 'cdek' || product.shop === 'stockmann' ? product.idd : product.id}
+    `
+  res.send(product)
 })
 
 app.listen(3001)
