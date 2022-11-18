@@ -81,6 +81,7 @@ module.exports = async function getSitemap(id) {
       // }))
       // colorArr.forEach(color => sitemapArr.push(`category/${color}`))
       sitemapArr.push(...allProductsNamesIdsArr)
+      sitemapArr = sitemapArr.filter(link => !link.includes('undefined'))
       // sitemapArr.push(...allAuxiliaryLinks)
       for (let s = 0, e = 45000; s < sitemapArr.length; s += 45000, e += 45000)
         fs.writeFileSync(`./sitemaps/sitemapUrlArr${s / 45000}.txt`, `${sitemapArr.slice(s, +e)}`)
