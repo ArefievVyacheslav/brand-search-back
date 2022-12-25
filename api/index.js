@@ -17,8 +17,8 @@ app.use(cors())
 app.use(express.static('prepareImages'))
 
 let selects,
-    main,
-    products
+  main,
+  products
 
 // Получение нужного товара
 app.get('/api/product/:id', async (req, res) => {
@@ -81,20 +81,25 @@ app.get('/api/main', async (req, res) => {
 
 // Получение нужного товара ДЛЯ ВК
 app.get('/api/vk-product/:id', async (req, res) => {
-  const id = req.params.id
-  let product = await getProduct(id)
-  product = `
-${product.pictureServer ? product.pictureServer : product.picture}
-${product.name}
-SALE ${product.sale}%
-SIZE ${product.params.size.reduce((acc, size, idx) => acc += product.params.size.length === 1
-      ? `${size}` : `${product.params.size.length - 1 !== idx
-          ? `${size}, ` : `${size}`}`, '')}
-old price ${product.oldprice} rub.
-NEW PRICE ${product.price} rub.
-link https://sales-search.ru/product/${translite((product.name))}-${product.shop === 'brandshop' || product.shop === 'cdek' || product.shop === 'stockmann' ? product.idd : product.id}
-    `
-  res.send(product)
+  const idArr = req.params.id.split('-')
+  const products = []
+  for (let id of idArr) {
+    let product = await getProduct(id)
+    if (!product) continue
+    products.push({
+      'img': `${ product.pictureServer ? product.pictureServer : product.picture }`,
+      'desc': `${ product.name }
+SALE ${ product.sale }%
+SIZE ${ product.params.size ? product.params.size.reduce((acc, size, idx) => acc += product.params.size.length === 1
+        ? `${ size }` : `${ product.params.size.length - 1 !== idx
+          ? `${ size }, ` : `${ size }` }`, '') : ''}
+old price ${ product.oldprice } rub.
+NEW PRICE ${ product.price } rub.
+link https://sales-search.ru/product/${ translite((product.name)) }-${ product.shop === 'brandshop' || product.shop === 'cdek' || product.shop === 'stockmann' ? product.idd : product.id }
+`
+    })
+  }
+  res.send(products)
 })
 
 app.listen(3001)
